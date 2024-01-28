@@ -22,16 +22,22 @@ print(data.loc[data.state == "Ohio"])
 
 def game_on(user):
 
-    answer = turtle.textinput(title="Input us state name", prompt="What's the name of the U.S. State?")
-    answer = answer.title()
+    answer = turtle.textinput(title="Input us state name", prompt="What's the name of the U.S. State?").title()
     print(answer)
 
 
     if answer in us_states and answer not in user.states_remembered_list:
         print("True\n--------------------")
+        state_details = data.loc[data.state == answer]
+        x = int(state_details.x.iloc[0])
+        y = int(state_details.y.iloc[0])
         user.states_remembered_list.append(answer)
-        turtle.write(answer, True, align="center")
-        # turtle.write((state_details.x, state_details.y), True)
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        t.goto(x, y)
+        t.pendown()
+        t.write(answer, True, align="center")
         return user
     
     print("False\n--------------------")
