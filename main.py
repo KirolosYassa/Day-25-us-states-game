@@ -86,11 +86,8 @@ while user.states_remembered_count < 50:
     user = game_on(user)
     if user.continue_game == False:
         break
-    
-for state in us_states:
-    if state in user.states_remembered_list:
-        continue
-    user.missing_states_list.append(state)
+
+user.missing_states_list = [state for state in us_states if state not in user.states_remembered_list]
 
 if len(user.missing_states_list) != 0:
     missing_states = pandas.DataFrame(user.missing_states_list)
